@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HackerNews Fetcher</title>
+    <meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
+
+    <!-- build:css css/all.css -->
+    <link rel="text/css" href="./bower_components/angular-material/angular-material.min.css">
+    <link rel="text/css" href="./style/main.css">
+    <!-- endbuild -->
+
+  </head>
+
+  <body ng-app="HackerNews" ng-controller="MainCtrl">
+    <md-content id="news-list" layout-md="row">
+      <h3>Top Hacker News</h3>
+      <md-list-item ng-repeat="item in news">
+        <div class="label">{{item.title}}</div>
+        <div class="md-button md-secondary">
+          <a ng-href={{item.url}} class="link" target="_blank">More...</a>
+        </div>
+      </md-list-item>
+    </md-content>
+
+    <!-- build:js js/libs.js -->
+    <script src="./bower_components/angular/angular.min.js"></script>
+    <script src="./script/app.js"></script>
+    <script src="./script/controllers/main.js"></script>
+    <!-- endbuild -->
+
+  </body>
+</html>
