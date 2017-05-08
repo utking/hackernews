@@ -16,7 +16,7 @@ gulp.task('usemin', function() {
 		inlinejs: [ uglify() ],
 		inlinecss: [ minifyCss(), 'concat' ]
 	}))
-	.pipe(gulp.dest('docs/'));
+	.pipe(gulp.dest('docs'));
 });
 
 gulp.task('default', ['usemin']);

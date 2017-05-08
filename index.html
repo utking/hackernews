@@ -6,22 +6,26 @@
   	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
 
     <!-- build:css css/all.css -->
-    <link rel="text/css" href="./bower_components/angular-material/angular-material.min.css">
+    <link rel="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="text/css" href="./style/main.css">
     <!-- endbuild -->
 
   </head>
 
-  <body ng-app="HackerNews" ng-controller="MainCtrl">
-    <md-content id="news-list" layout-md="row">
+  <body ng-app="HackerNews" ng-controller="MainCtrl" ng-cloak="">
+    <div id="news-list" class="container-fluid">
       <h3>Top Hacker News</h3>
-      <md-list-item ng-repeat="item in news">
-        <div class="label">{{item.title}}</div>
-        <div class="md-button md-secondary">
-          <a ng-href={{item.url}} class="link" target="_blank">More...</a>
-        </div>
-      </md-list-item>
-    </md-content>
+      <hr>
+      <div class="alert alert-info" ng-if="curStep" ng-bind="curStep"></div>
+      <div ng-repeat="item in news">
+        <blockquote>
+          <p>{{item.title}}</p>
+          <footer>
+            <a ng-href={{item.url}} class="btn-link" target="_blank">More...</a>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
 
     <!-- build:js js/libs.js -->
     <script src="./bower_components/angular/angular.min.js"></script>
