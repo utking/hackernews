@@ -23,6 +23,6 @@
   ],
   "dependencies": {
     "angular": "angular2#^1.6.4",
-    "bootstrap": "^3.3.7"
+    "mini.css": "^2.1.5"
   }
 }
