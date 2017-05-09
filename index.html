@@ -22,8 +22,12 @@
     <div id="news-list" class="container-fluid">
       <h3>Top Hacker News</h3>
       <hr>
+      <div class="container">
+        <select class="form-control" ng-model="curFilter"
+          ng-options="f.value as f.title for f in filters"></select>
+      </div>
       <div class="alert alert-info" ng-if="curStep" ng-bind="curStep"></div>
-      <div ng-repeat="item in news" class="card fluid">
+      <div ng-repeat="item in news | subject:curFilter" class="card fluid">
         <div class="section">
           <h3>{{::item.title}}</h3>
           <p>
@@ -38,6 +42,7 @@
     <script src="./script/app.js"></script>
     <script src="./script/controllers/main.js"></script>
     <script src="./script/services/storage.js"></script>
+    <script src="./script/filters/SubjectFilter.js"></script>
     <!-- endbuild -->
 
   </body>
