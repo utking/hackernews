@@ -42,6 +42,7 @@
           $scope.curStep = 'Filtering items...';
 
           results.forEach(function(i) {
+            storage.set(''+i.id, {nonJs: true, type: i.type, title: i.title, url: i.url});
             $scope.news.push({type: i.type, title: i.title, url: i.url});
           });
           $scope.curStep = null;
