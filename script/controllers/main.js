@@ -35,15 +35,18 @@
                 $scope.error = err;
               }));
           } else {
-            $scope.news.push(prevItem);
+            if (prevItem.url)
+              $scope.news.push(prevItem);
           }
         });
         $q.all(newsUrls).then(function(results){
           $scope.curStep = 'Filtering items...';
 
           results.forEach(function(i) {
-            storage.set(''+i.id, {nonJs: true, type: i.type, title: i.title, url: i.url});
-            $scope.news.push({type: i.type, title: i.title, url: i.url});
+            storage.set(''+i.id, {type: i.type, title: i.title, url: i.url});
+            if (i.url) {
+              $scope.news.push({type: i.type, title: i.title, url: i.url});
+            }
           });
           $scope.curStep = null;
         });
