@@ -1,19 +1,23 @@
 (function() {
   angular.module('HackerNews')
   .constant('API_BASE_URL', 'https://hacker-news.firebaseio.com/v0')
-  .controller('MainCtrl', ['$scope', '$q', 
+  .controller('MainCtrl', ['$scope', '$q', '$filter',
     'StorageService', 'subjectFilter', 'API_BASE_URL',
-    function($scope, $q, StorageService, subjectFilter, API_BASE_URL) {
+    function($scope, $q, $filter, StorageService, subjectFilter, API_BASE_URL) {
     $scope.news = [];
     $scope.curStep = 'Fetching the list...';
     $scope.filters = [
       { title: 'All' },
-      { title: 'General', value: 'js,script,node,css,style' },
-      { title: 'JavaScript', value: 'js,script,node' },
+      { title: 'General', value: '\bjs\b,(ecma|java).*script,node.?js,css,style' },
+      { title: 'JavaScript', value: '\bjs\b,(ecma|java).*script,node.?js' },
       { title: 'Css', value: 'css,style' },
       { title: 'Angular', value: 'angular' }
     ];
     $scope.curFilter = $scope.filters[1].value;
+
+    $scope.filterNews = function() {
+      return $filter('subject')($scope.news, $scope.curFilter).length;
+    };
 
     var newsUrls = [];
     var deferred = $q.defer();
@@ -43,9 +47,9 @@
           $scope.curStep = 'Filtering items...';
 
           results.forEach(function(i) {
-            storage.set(''+i.id, {type: i.type, title: i.title, url: i.url});
+            storage.set(''+i.id, {type: i.type, title: i.title, url: i.url, time: i.time});
             if (i.url) {
-              $scope.news.push({type: i.type, title: i.title, url: i.url});
+              $scope.news.push({type: i.type, title: i.title, url: i.url, time: i.time});
             }
           });
           $scope.curStep = null;
