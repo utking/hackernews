@@ -7,11 +7,11 @@
     $scope.news = [];
     $scope.filters = [
       { title: 'All' },
-      { title: 'General', value: '\bjs\b,(ecma|java).*script,node.?js,css,style' },
-      { title: 'JavaScript', value: '\bjs\b,(ecma|java).*script,node.?js' },
-      { title: 'API', value: '\bapi\b' },
+      { title: 'General', value: '\\bjs\\b,(ecma|java).*script,node.?js,css,style' },
+      { title: 'JavaScript', value: '\\bjs\\b,(ecma|java).*script,node.?js' },
+      { title: 'API', value: '\\bapi\\b' },
       { title: 'Css', value: 'css,style' },
-      { title: 'Angular', value: 'angular' }
+      { title: 'Angular', value: '\\bangular\\b' }
     ];
     $scope.curFilter = $scope.filters[1].value;
     $scope.customeFilter = $scope.filters[0];
