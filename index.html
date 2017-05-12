@@ -22,9 +22,13 @@
     <div id="news-list" class="container-fluid">
       <h3>Top Hacker News <span>({{filterNews()}} / {{news.length}})</span></h3>
       <hr>
-      <div class="container">
+      <div class="row">
         <select class="form-control" ng-model="curFilter"
-          ng-options="f.value as f.title for f in filters"></select>
+                                     ng-options="f.value as f.title for f in filters"></select>
+        <span class="btn btn-default button secondary" 
+              role="button" ng-click="refreshItems(curFilter)">
+          <span class="glyphicon glyphicon-refresh">Refresh</span>
+        </span>
       </div>
       <div class="alert alert-info" ng-if="curStep" ng-bind="curStep"></div>
       <div ng-repeat="item in news | subject:curFilter | orderBy:'-time'" class="card fluid">
@@ -33,7 +37,7 @@
           <div class="row">
             <div class="col-md-8 col-sm-6">
               <p>
-                <a ng-href={{::item.url}} class="btn-link" target="_blank">More...</a>
+              <a ng-href={{::item.url}} class="btn-link" target="_blank">More...</a>
               </p>
             </div>
             <div class="col-md-4 col-sm-6 text-right">{{item.time*1000 | date:'medium'}}</div>
