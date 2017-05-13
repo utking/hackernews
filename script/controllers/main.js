@@ -7,7 +7,7 @@
     $scope.news = [];
     $scope.filters = [
       { title: 'All' },
-      { title: 'General', value: '\\bjs\\b,(ecma|java).*script,node.?js,css,style' },
+      { title: 'General', value: '\\bjs\\b,(ecma|java).*script,node.?js,\\bcss\\b,\\bstyle\\b' },
       { title: 'JavaScript', value: '\\bjs\\b,(ecma|java).*script,node.?js' },
       { title: 'API', value: '\\bapi\\b' },
       { title: 'Css', value: 'css,style' },
@@ -23,6 +23,17 @@
     var newsUrls = [];
     var deferred = $q.defer();
     var storage = StorageService.getStorage('hackernews');
+
+    var prevFilter = storage.get('prevFilter');
+    if (prevFilter) {
+      $scope.curFilter = prevFilter;
+    }
+
+    $scope.$watch('curFilter', function(prev, cur) {
+      if (cur && prev !== cur) {
+        storage.set('prevFilter', $scope.curFilter);
+      }
+    });
 
     $scope.refreshItems = function(filter) {
       if (filter)
