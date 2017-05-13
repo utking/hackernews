@@ -93,7 +93,11 @@
         if (val === null) {
             return defVal;
         }
-        return JSON.parse(val);
+        try {
+          return JSON.parse(val);
+        } catch (e) {
+          return defVal;
+        }
     };
 
     /**
