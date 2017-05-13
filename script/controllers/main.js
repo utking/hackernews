@@ -25,9 +25,7 @@
     var storage = StorageService.getStorage('hackernews');
 
     var prevFilter = storage.get('prevFilter');
-    if (prevFilter) {
-      $scope.curFilter = prevFilter;
-    }
+    $scope.curFilter = prevFilter;
 
     $scope.$watch('curFilter', function(cur, prev) {
       if (cur !== prev) {
