@@ -133,13 +133,25 @@
         return this;
     };
 
+    var getPrevNews = function(storage) {
+      if (!storage || !storage.get) {
+        return [];
+      }
+      var prevNews = storage.get('prevNews');
+      if (!Array.isArray(prevNews)) {
+        prevNews = [];
+      }
+      return prevNews;
+    }
+
     /**
      * Public interface
      */
     return {
       getStorage: function (basketName) {
         return new LocalStorage(basketName);
-      }
+      },
+      getPrevNews: getPrevNews
     };
   }]);
 })(this);

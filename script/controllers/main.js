@@ -38,11 +38,13 @@
         $scope.curFilter = filter;
       $scope.news = [];
       newsUrls = [];
+
       $scope.curStep = 'Fetching the list...';
       fetch(API_BASE_URL+'/topstories.json')
         .then(function(x) { return x.json(); })
         .then(function(x) {
-          x.forEach(function(a, n) {
+          concatUniq(x, StorageService.getPrevNews(storage))
+          .forEach(function(a, n) {
             var prevItem = storage.get(''+a);
             if (prevItem === null || prevItem === undefined) {
               newsUrls.push(
@@ -69,11 +71,25 @@
               }
             });
             $scope.curStep = null;
+            storage.set('prevNews', $scope.news.map(function(i) {
+              return i.id;
+            }));
           });
         });
     };
 
     $scope.refreshItems();
+
+    function concatUniq(ar1, ar2) {
+      var result = ar1.concat(ar2).reduce(function(prev, i) {
+        //if (!prev) prev = [];
+        if (i && prev.indexOf(i) === -1) {
+          prev.push(i);
+        }
+        return prev;
+      }, []);
+      return result;
+    }
 
   }]);
 })();

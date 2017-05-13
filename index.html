@@ -6,8 +6,8 @@
   	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
 
     <!-- build:css css/all.css -->
-    <link rel="text/css" href="./bower_components/mini.css/dist/mini-default.min.css">
-    <link rel="text/css" href="./style/main.css">
+    <link rel="stylesheet" href="./bower_components/mini.css/dist/mini-default.min.css">
+    <link rel="stylesheet" href="./style/main.css">
     <!-- endbuild -->
 
     <style>
@@ -25,10 +25,10 @@
       <div class="row">
         <select class="form-control" ng-model="curFilter"
                                      ng-options="f.value as f.title for f in filters"></select>
-        <span class="btn btn-default button secondary" 
-              role="button" ng-click="refreshItems(curFilter)">
-          <span class="glyphicon glyphicon-refresh">Refresh</span>
-        </span>
+        <button class="btn btn-default button secondary" 
+          ng-disabled="curStep" role="button" 
+          ng-click="refreshItems(curFilter)">Refresh
+        </button>
       </div>
       <div class="alert alert-info" ng-if="curStep" ng-bind="curStep"></div>
       <div ng-repeat="item in news | subject:curFilter | orderBy:'-time'" class="card fluid">
