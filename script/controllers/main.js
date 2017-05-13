@@ -29,8 +29,8 @@
       $scope.curFilter = prevFilter;
     }
 
-    $scope.$watch('curFilter', function(prev, cur) {
-      if ($scope.curFilter) {
+    $scope.$watch('curFilter', function(cur, prev) {
+      if (cur !== prev && $scope.curFilter) {
         storage.set('prevFilter', $scope.curFilter);
       }
     });
