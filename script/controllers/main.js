@@ -30,7 +30,7 @@
     }
 
     $scope.$watch('curFilter', function(cur, prev) {
-      if (cur !== prev && $scope.curFilter) {
+      if (cur !== prev) {
         storage.set('prevFilter', $scope.curFilter);
       }
     });
