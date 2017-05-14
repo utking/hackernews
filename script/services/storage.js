@@ -142,7 +142,19 @@
         prevNews = [];
       }
       return prevNews;
-    }
+    };
+
+    var removeCachedItems = function(storage, items) {
+      if (Array.isArray(items)) {
+        items.forEach(function(i) {
+          storate.remove(''+i);
+        });
+      }
+    };
+
+    var cleanCache = function(storage) {
+      storage.clean();
+    };
 
     /**
      * Public interface
@@ -151,7 +163,9 @@
       getStorage: function (basketName) {
         return new LocalStorage(basketName);
       },
-      getPrevNews: getPrevNews
+      getPrevNews: getPrevNews,
+      removeCachedItems: removeCachedItems,
+      cleanCache: cleanCache
     };
   }]);
 })(this);

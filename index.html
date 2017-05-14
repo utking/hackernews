@@ -29,6 +29,9 @@
           ng-disabled="curStep" role="button" 
           ng-click="refreshItems(curFilter)">Refresh
         </button>
+        <button class="btn btn-default button tertiary" id="clean-cache-btn"
+          role="button" ng-click="cleanCache()">Clean cache
+        </button>
       </div>
       <div class="alert alert-info" ng-if="curStep" ng-bind="curStep"></div>
       <div ng-repeat="item in news | subject:curFilter | orderBy:'-time'" class="card fluid">

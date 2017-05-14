@@ -23,6 +23,9 @@
     var newsUrls = [];
     var deferred = $q.defer();
     var storage = StorageService.getStorage('hackernews');
+    $scope.cleanCache = function() {
+      StorageService.cleanCache(storage);
+    };
 
     var prevFilter = storage.get('prevFilter');
     $scope.curFilter = prevFilter;
@@ -65,9 +68,9 @@
             $scope.curStep = 'Filtering items...';
 
             results.forEach(function(i) {
-              storage.set(''+i.id, {type: i.type, title: i.title, url: i.url, time: i.time});
+              storage.set(''+i.id, {id: i.id, type: i.type, title: i.title, url: i.url, time: i.time});
               if (i.url) {
-                $scope.news.push({type: i.type, title: i.title, url: i.url, time: i.time});
+                $scope.news.push({id: i.id, type: i.type, title: i.title, url: i.url, time: i.time});
               }
             });
             $scope.curStep = null;
@@ -81,7 +84,8 @@
     $scope.refreshItems();
 
     function concatUniq(ar1, ar2) {
-      var result = ar1.concat(ar2).reduce(function(prev, i) {
+      var result = ar1.concat(ar2)
+      .reduce(function(prev, i) {
         //if (!prev) prev = [];
         if (i && prev.indexOf(i) === -1) {
           prev.push(i);
