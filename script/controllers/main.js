@@ -10,7 +10,7 @@
       { title: 'General', value: '\\bjs\\b,(ecma|java).*script,node.?js,\\bcss\\b,\\bstyle\\b' },
       { title: 'JavaScript', value: '\\bjs\\b,(ecma|java).*script,node.?js' },
       { title: 'API', value: '\\bapi\\b' },
-      { title: 'Css', value: '\\bcss\bb,\\bstyle\\b' },
+      { title: 'Css', value: '\\bcss\\b,\\bstyle\\b' },
       { title: 'Angular', value: '\\bangular' }
     ];
     $scope.curFilter = $scope.filters[1].value;
