@@ -1,9 +1,12 @@
 (function() {
   angular.module('HackerNews')
   .constant('API_BASE_URL', 'https://hacker-news.firebaseio.com/v0')
+  .constant('HOT_ITEM_PERIOD', 1800)//half a minute
   .controller('MainCtrl', ['$scope', '$q', '$filter',
-    'StorageService', 'subjectFilter', 'API_BASE_URL',
-    function($scope, $q, $filter, StorageService, subjectFilter, API_BASE_URL) {
+    'StorageService', 'subjectFilter', 
+    'API_BASE_URL', 'HOT_ITEM_PERIOD',
+    function($scope, $q, $filter, StorageService, 
+      subjectFilter, API_BASE_URL, HOT_ITEM_PERIOD) {
     $scope.news = [];
     $scope.filters = [
       { title: 'All' },
@@ -15,6 +18,10 @@
     ];
     $scope.curFilter = $scope.filters[1].value;
     $scope.customeFilter = $scope.filters[0];
+
+    $scope.isHotItem = function(item) {
+      return (new Date - item.created)/1000 < HOT_ITEM_PERIOD;
+    };
 
     $scope.filterNews = function() {
       return $filter('subject')($scope.news, $scope.curFilter).length;
@@ -68,10 +75,21 @@
             $scope.curStep = 'Filtering items...';
 
             results.forEach(function(i) {
-              storage.set(''+i.id, {id: i.id, type: i.type, title: i.title, url: i.url, time: i.time});
+
+              var item = {
+                id: i.id,
+                created: (new Date).valueOf(),
+                type: i.type,
+                title: i.title,
+                url: i.url,
+                time: i.time
+              };
+
+              storage.set(''+i.id, item);
               if (i.url) {
-                $scope.news.push({id: i.id, type: i.type, title: i.title, url: i.url, time: i.time});
+                $scope.news.push(item);
               }
+
             });
             $scope.curStep = null;
             storage.set('prevNews', $scope.news.map(function(i) {

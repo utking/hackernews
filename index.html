@@ -34,7 +34,7 @@
         </button>
       </div>
       <div class="alert alert-info" ng-if="curStep" ng-bind="curStep"></div>
-      <div ng-repeat="item in news | subject:curFilter | orderBy:'-time'" class="card fluid">
+      <div ng-repeat="item in news | subject:curFilter | orderBy:'-time'" class="card fluid" ng-class='{"hot-item":isHotItem(item)}'>
         <div class="section">
           <h3>{{::item.title}}</h3>
           <div class="row">
