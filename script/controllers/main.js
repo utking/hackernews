@@ -7,6 +7,7 @@
     'API_BASE_URL', 'HOT_ITEM_PERIOD',
     function($scope, $q, $filter, StorageService, 
       subjectFilter, hotNewsFilter, API_BASE_URL, HOT_ITEM_PERIOD) {
+    var storage = StorageService.getStorage('hackernews');
     $scope.news = [];
     $scope.filters = [
       { title: 'All' },
@@ -18,7 +19,7 @@
     ];
     $scope.curFilter = $scope.filters[1].value;
     $scope.customeFilter = $scope.filters[0];
-		$scope.onlyHotNews = false;
+		$scope.onlyHotNews = storage.get('onlyHotNews');
 
     $scope.isHotItem = function(item) {
       return (new Date - item.created)/1000 < HOT_ITEM_PERIOD;
@@ -37,7 +38,6 @@
 
     var newsUrls = [];
     var deferred = $q.defer();
-    var storage = StorageService.getStorage('hackernews');
     $scope.cleanCache = function() {
       StorageService.cleanCache(storage);
     };
@@ -48,6 +48,12 @@
     $scope.$watch('curFilter', function(cur, prev) {
       if (cur !== prev) {
         storage.set('prevFilter', $scope.curFilter);
+      }
+    });
+
+    $scope.$watch('onlyHotNews', function(cur, prev) {
+      if (cur !== prev) {
+        storage.set('onlyHotNews', cur);
       }
     });
 
