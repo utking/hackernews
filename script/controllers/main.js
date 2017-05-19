@@ -3,10 +3,10 @@
   .constant('API_BASE_URL', 'https://hacker-news.firebaseio.com/v0')
   .constant('HOT_ITEM_PERIOD', 1800)//half a minute
   .controller('MainCtrl', ['$scope', '$q', '$filter',
-    'StorageService', 'subjectFilter', 
+    'StorageService', 'subjectFilter', 'hotNewsFilter',
     'API_BASE_URL', 'HOT_ITEM_PERIOD',
     function($scope, $q, $filter, StorageService, 
-      subjectFilter, API_BASE_URL, HOT_ITEM_PERIOD) {
+      subjectFilter, hotNewsFilter, API_BASE_URL, HOT_ITEM_PERIOD) {
     $scope.news = [];
     $scope.filters = [
       { title: 'All' },
@@ -18,13 +18,21 @@
     ];
     $scope.curFilter = $scope.filters[1].value;
     $scope.customeFilter = $scope.filters[0];
+		$scope.onlyHotNews = false;
 
     $scope.isHotItem = function(item) {
       return (new Date - item.created)/1000 < HOT_ITEM_PERIOD;
     };
 
     $scope.filterNews = function() {
-      return $filter('subject')($scope.news, $scope.curFilter).length;
+      return $filter('subject')(
+					$filter('hotNews')($scope.news, $scope.onlyHotNews, HOT_ITEM_PERIOD),
+					$scope.curFilter
+					);
+    };
+
+    $scope.filterNewsLength = function() {
+      return $scope.filterNews().length;
     };
 
     var newsUrls = [];

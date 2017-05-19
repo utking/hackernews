@@ -20,21 +20,25 @@
 
   <body ng-app="HackerNews" ng-controller="MainCtrl" ng-cloak="">
     <div id="news-list" class="container-fluid">
-      <h3>Top Hacker News <span>({{filterNews()}} / {{news.length}})</span></h3>
+      <h3>Top Hacker News <span>({{filterNewsLength()}} / {{news.length}})</span></h3>
       <hr>
       <div class="row">
-        <select class="form-control" ng-model="curFilter"
-                                     ng-options="f.value as f.title for f in filters"></select>
-        <button class="btn btn-default button secondary" 
-          ng-disabled="curStep" role="button" 
-          ng-click="refreshItems(curFilter)">Refresh
-        </button>
-        <button class="btn btn-default button tertiary" id="clean-cache-btn"
-          role="button" ng-click="cleanCache()">Clean cache
-        </button>
+				<div class="input-group">
+					<select class="form-control" ng-model="curFilter"
+																	ng-options="f.value as f.title for f in filters"></select>
+					<button class="btn btn-default button secondary" 
+						 ng-disabled="curStep" role="button" 
+														 ng-click="refreshItems(curFilter)">Refresh
+					</button>
+					<button class="btn btn-default button tertiary" id="clean-cache-btn"
+																										 role="button" ng-click="cleanCache()">Clean cache
+					</button>
+					<input type="checkbox" ng-model="onlyHotNews" class="" id="onlyHotNews" tabindex="0">
+					<label for="onlyHotNews">Only hot news</label>
+				</div>
       </div>
       <div class="alert alert-info" ng-if="curStep" ng-bind="curStep"></div>
-      <div ng-repeat="item in news | subject:curFilter | orderBy:'-time'" class="card fluid" ng-class='{"hot-item":isHotItem(item)}'>
+      <div ng-repeat="item in filterNews(news) | orderBy:'-time'" class="card fluid" ng-class='{"hot-item":isHotItem(item)}'>
         <div class="section">
           <h3>{{::item.title}}</h3>
           <div class="row">
@@ -57,6 +61,7 @@
     <script src="./script/controllers/main.js"></script>
     <script src="./script/services/storage.js"></script>
     <script src="./script/filters/SubjectFilter.js"></script>
+    <script src="./script/filters/HotNewsFilter.js"></script>
     <!-- endbuild -->
 
   </body>
