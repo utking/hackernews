@@ -54,6 +54,8 @@
           </div>
         </div>
       </div>
+      <div ng-if="filterNewsLength() === 0 && !curStep" class="alert alert-info">Nothing to show</div>
+      <hr>
     </div>
 
     <script src="//connect.facebook.net/en_US/sdk.js"></script>
