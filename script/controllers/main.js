@@ -7,6 +7,13 @@
     'API_BASE_URL', 'HOT_ITEM_PERIOD',
     function($scope, $q, $filter, StorageService, 
       subjectFilter, hotNewsFilter, API_BASE_URL, HOT_ITEM_PERIOD) {
+      FB.init({
+        appId: '628486370676726',
+        xfbml: true,
+        version: 'v2.9'
+      });
+      FB.AppEvents.logPageView();
+      
     var storage = StorageService.getStorage('hackernews');
     $scope.news = [];
     $scope.filters = [
@@ -20,6 +27,14 @@
     $scope.curFilter = $scope.filters[1].value;
     $scope.customeFilter = $scope.filters[0];
 		$scope.onlyHotNews = storage.get('onlyHotNews');
+
+    $scope.share = function(url) {
+      FB.ui({
+        method: 'share',
+        href: url,
+      },
+      function(response) {});
+    };
 
     $scope.isHotItem = function(item) {
       return (new Date - item.created)/1000 < HOT_ITEM_PERIOD;
