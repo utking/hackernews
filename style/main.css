@@ -28,3 +28,11 @@ body {
 .hot-item {
   background: #cceeaf;
 }
+
+.card p {
+  margin: 0 !important;
+}
+.card a {
+  text-decoration: none;
+}
+

@@ -156,6 +156,23 @@
       storage.clean();
     };
 
+    var initFB = function() {
+      FB.init({
+        appId: '628486370676726',
+        xfbml: true,
+        version: 'v2.9'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    var share = function(url) {
+      FB.ui({
+        method: 'share',
+        href: url,
+      },
+      function(response) {});
+    };
+
     /**
      * Public interface
      */
@@ -165,7 +182,9 @@
       },
       getPrevNews: getPrevNews,
       removeCachedItems: removeCachedItems,
-      cleanCache: cleanCache
+      cleanCache: cleanCache,
+      initFB: initFB,
+      share: share
     };
   }]);
 })(this);
