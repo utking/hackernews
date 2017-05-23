@@ -24,7 +24,7 @@
       $scope.curFilter = $scope.filters[1].value;
       $scope.customeFilter = $scope.filters[0];
 		  $scope.onlyHotNews = storage.get('onlyHotNews');
-      $scope.share = StorageService.share;
+      $scope.fbShare = StorageService.fbShare;
 
       $scope.isHotItem = function(item) {
         return (new Date - item.created)/1000 < HOT_ITEM_PERIOD;

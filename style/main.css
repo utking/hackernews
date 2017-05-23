@@ -36,3 +36,18 @@ body {
   text-decoration: none;
 }
 
+a.vk-share-btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
+a.vk-share-btn span {
+  position: relative;
+  padding: 0;
+}
+
+a.vk-share-btn span img {
+  width: 20px;
+  height: 20px;
+}
+

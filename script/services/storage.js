@@ -165,7 +165,7 @@
       FB.AppEvents.logPageView();
     };
 
-    var share = function(url) {
+    var fbShare = function(url) {
       FB.ui({
         method: 'share',
         href: url,
@@ -184,7 +184,7 @@
       removeCachedItems: removeCachedItems,
       cleanCache: cleanCache,
       initFB: initFB,
-      share: share
+      fbShare: fbShare
     };
   }]);
 })(this);
