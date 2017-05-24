@@ -157,20 +157,23 @@
     };
 
     var initFB = function() {
-      FB.init({
-        appId: '628486370676726',
-        xfbml: true,
-        version: 'v2.9'
-      });
-      FB.AppEvents.logPageView();
+      try {
+        FB.init({
+          appId: '628486370676726',
+          xfbml: true,
+          version: 'v2.9'
+        });
+        FB.AppEvents.logPageView();
+      } catch(e) {}
     };
 
     var fbShare = function(url) {
-      FB.ui({
-        method: 'share',
-        href: url,
-      },
-      function(response) {});
+      try {
+        FB.ui({
+          method: 'share',
+          href: url,
+        }, function(response) {});
+      } catch(e) {}
     };
 
     /**

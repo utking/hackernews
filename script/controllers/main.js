@@ -114,6 +114,19 @@
                 return i.id;
               }));
             });
+          })
+          .catch(function(err) {
+            // Fail-safe: read from cache
+            $scope.$apply(function() {
+              StorageService.getPrevNews(storage)
+              .forEach(function(a, n) {
+                var prevItem = storage.get(''+a);
+                if (prevItem && prevItem.url) {
+                    $scope.news.push(prevItem);
+                }
+              });
+              $scope.curStep = null;
+            });
           });
       };
 
