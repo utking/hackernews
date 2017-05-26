@@ -14,8 +14,8 @@
       $scope.news = [];
       $scope.filters = [
         { title: 'All' },
-        { title: 'General', value: '\\bjs\\b,(ecma|java).*script,node.?js,\\bcss\\b,\\bstyle\\b,\\blinux\\b' },
-        { title: 'JavaScript', value: '\\bjs\\b,(ecma|java).*script,node.?js' },
+        { title: 'General', value: '\\bjs\\b,(ecma|java).*script,node.?js,\\bcss\\b,\\bstyle\\b,\\blinux\\b,\\bnpm\\b' },
+        { title: 'JavaScript', value: '\\bjs\\b,(ecma|java).*script,node.?js,\\bnpm\\b' },
         { title: 'API', value: '\\bapi\\b' },
         { title: 'Css', value: '\\bcss\\b,\\bstyle\\b' },
         { title: 'Linux', value: '\\linux\\b' },
