@@ -2,6 +2,16 @@
   angular.module('HackerNews')
   .factory('StorageService', [function() {
 
+    var _filters = [
+      { title: 'All' },
+      { title: 'General', value: '\\bjs\\b,(ecma|java).*script,node.?js,\\bcss\\b,\\bstyle\\b,\\blinux\\b,\\bnpm\\b' },
+      { title: 'JavaScript', value: '\\bjs\\b,(ecma|java).*script,node.?js,\\bnpm\\b' },
+      { title: 'API', value: '\\bapi\\b' },
+      { title: 'Css', value: '\\bcss\\b,\\bstyle\\b' },
+      { title: 'Linux', value: '\\linux\\b' },
+      { title: 'Angular', value: '\\bangular' }
+    ];
+
     /**
      * LocalStorage class allowing to store any types including
      * arrays and objects. Uses localStorage when it's possible
@@ -176,10 +186,22 @@
       } catch(e) {}
     };
 
+    var _concatUniq = function (ar1, ar2) {
+      return ar1.concat(ar2)
+        .reduce(function(prev, i) {
+          if (i && prev.indexOf(i) === -1) {
+            prev.push(i);
+          }
+          return prev;
+        }, []);
+    };
+
     /**
      * Public interface
      */
     return {
+      filters: _filters,
+      concatUniq: _concatUniq,
       getStorage: function (basketName) {
         return new LocalStorage(basketName);
       },

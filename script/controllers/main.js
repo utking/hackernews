@@ -1,30 +1,20 @@
 (function() {
   angular.module('HackerNews')
-  .constant('API_BASE_URL', 'https://hacker-news.firebaseio.com/v0')
-  .constant('HOT_ITEM_PERIOD', 1800)//half a minute
   .controller('MainCtrl', ['$scope', '$q', '$filter',
     'StorageService', 'subjectFilter', 'hotNewsFilter',
     'API_BASE_URL', 'HOT_ITEM_PERIOD',
     function($scope, $q, $filter, StorageService, 
-      subjectFilter, hotNewsFilter,
-      API_BASE_URL, HOT_ITEM_PERIOD) {
+      subjectFilter, hotNewsFilter, API_BASE_URL, HOT_ITEM_PERIOD) {
       
       StorageService.initFB();
       var storage = StorageService.getStorage('hackernews');
       $scope.news = [];
-      $scope.filters = [
-        { title: 'All' },
-        { title: 'General', value: '\\bjs\\b,(ecma|java).*script,node.?js,\\bcss\\b,\\bstyle\\b,\\blinux\\b,\\bnpm\\b' },
-        { title: 'JavaScript', value: '\\bjs\\b,(ecma|java).*script,node.?js,\\bnpm\\b' },
-        { title: 'API', value: '\\bapi\\b' },
-        { title: 'Css', value: '\\bcss\\b,\\bstyle\\b' },
-        { title: 'Linux', value: '\\linux\\b' },
-        { title: 'Angular', value: '\\bangular' }
-      ];
+      $scope.filters = StorageService.filters;
       $scope.curFilter = $scope.filters[1].value;
       $scope.customeFilter = $scope.filters[0];
 		  $scope.onlyHotNews = storage.get('onlyHotNews');
       $scope.fbShare = StorageService.fbShare;
+      var concatUniq = StorageService.concatUniq;
 
       $scope.isHotItem = function(item) {
         return (new Date - item.created)/1000 < HOT_ITEM_PERIOD;
@@ -131,16 +121,6 @@
       };
 
       $scope.refreshItems();
-
-      function concatUniq(ar1, ar2) {
-        return ar1.concat(ar2)
-        .reduce(function(prev, i) {
-          if (i && prev.indexOf(i) === -1) {
-            prev.push(i);
-          }
-          return prev;
-        }, []);
-      }
 
   }]);
 })();
