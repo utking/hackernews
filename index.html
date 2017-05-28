@@ -58,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div ng-if="filterNewsLength() === 0 && !curStep" class="alert alert-info">Nothing to show</div>
+      <div ng-if="filterNewsLength(news, curFilter, onlyHotNews) === 0 && !curStep" class="alert alert-info">Nothing to show</div>
       <hr>
     </div>
 
