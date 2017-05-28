@@ -20,7 +20,7 @@
 
   <body ng-app="HackerNews" ng-controller="MainCtrl" ng-cloak="">
     <div id="news-list" class="container-fluid">
-      <h3>Top Hacker News <span>({{filterNewsLength()}} / {{news.length}})</span></h3>
+      <h3>Top Hacker News <span>({{filterNewsLength(news, curFilter, onlyHotNews)}} / {{news.length}})</span></h3>
       <hr>
       <div class="row">
 				<div class="input-group">
@@ -38,7 +38,7 @@
 				</div>
       </div>
       <div class="alert alert-info" ng-if="curStep" ng-bind="curStep"></div>
-      <div ng-repeat="item in filterNews(news) | orderBy:'-time'" class="card fluid" ng-class='{"hot-item":isHotItem(item)}'>
+      <div ng-repeat="item in filterNews(news, curFilter, onlyHotNews) | orderBy:'-time'" class="card fluid" ng-class='{"hot-item":isHotItem(item)}'>
         <div class="section">
           <h3>{{::item.title}} <a ng-href={{::item.url}} class="btn-link" target="_blank">[more...]</a></h3>
           <div class="row">

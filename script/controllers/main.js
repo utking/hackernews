@@ -30,15 +30,15 @@
         return (new Date - item.created)/1000 < HOT_ITEM_PERIOD;
       };
 
-      $scope.filterNews = function() {
+      $scope.filterNews = function(news, filter, hotNews) {
         return $filter('subject')(
-					  $filter('hotNews')($scope.news, $scope.onlyHotNews, HOT_ITEM_PERIOD),
-					  $scope.curFilter
-					  );
+					$filter('hotNews')(news, hotNews, HOT_ITEM_PERIOD), filter
+				);
       };
 
-      $scope.filterNewsLength = function() {
-        return $scope.filterNews().length;
+      $scope.filterNewsLength = function(news, filter, hotNews) {
+        var items = $scope.filterNews(news, filter, hotNews);
+        return (items ? items.length : 0);
       };
 
       var newsUrls = [];
