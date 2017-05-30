@@ -4,15 +4,6 @@ html, body {
   font-family: Arial;
 }
 
-body {
-  width: 90%;
-  margin: 1em auto;
-}
-
-#news-list {
-  /* */
-}
-
 .text-right {
   text-align: right;
 }
