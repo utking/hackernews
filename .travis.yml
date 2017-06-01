@@ -1,8 +1,6 @@
 language: node_js
 before_script:
   - npm install -g gulp
-  - npm install gulp
-  - bower install
   - npm install -g bower
-  - npm install bower
+  - bower install
 script: npm test
