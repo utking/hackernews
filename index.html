@@ -41,7 +41,7 @@
       <div class="row">
       </div>
       <div class="alert alert-info" ng-if="curStep" ng-bind="curStep"></div>
-      <div ng-repeat="item in filterNews(news, curFilter, onlyHotNews) | orderBy:'-time'" class="card fluid" ng-class='{"hot-item":isHotItem(item)}'>
+      <div ng-repeat="item in filterNews(news, curFilter, onlyHotNews) | orderBy:'-time' track by $index" class="card fluid" ng-class='{"hot-item":isHotItem(item)}'>
         <div class="section">
           <h3>{{::item.title}} <a ng-href={{::item.url}} class="btn-link" target="_blank">[more...]</a></h3>
           <div class="row">
