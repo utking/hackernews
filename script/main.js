@@ -1,4 +1,4 @@
-const apiBaseUrl = 'https://hacker-news.firebaseio.com/v0';
+const apiBaseUrl = "https://hacker-news.firebaseio.com/v0";
 
 fetch(`${apiBaseUrl}/topstories.json`)
   .then(x => x.json())
@@ -7,8 +7,9 @@ fetch(`${apiBaseUrl}/topstories.json`)
       fetch(`${apiBaseUrl}/item/${a}.json`)
         .then(i => i.json())
         .then((i) => {
-		      if (/js/i.test(i.title) || /script/i.test(i.title))
+		      if (/js/i.test(i.title) || /script/i.test(i.title)) {
             console.log(`${i.type}:: ${i.title} | ${i.url}`);
-      });
-  })
-});
+          }
+        });
+    })
+  });

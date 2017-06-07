@@ -21,7 +21,7 @@ html, body {
 }
 
 .card p {
-  margin: 0 !important;
+  margin: 0;
 }
 .card a {
   text-decoration: none;

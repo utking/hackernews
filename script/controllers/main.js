@@ -1,18 +1,18 @@
 (function() {
-  angular.module('HackerNews')
-  .controller('MainCtrl', ['$scope', '$q', '$filter',
-    'StorageService', 'subjectFilter', 'hotNewsFilter',
-    'API_BASE_URL', 'HOT_ITEM_PERIOD',
+  angular.module("HackerNews")
+  .controller("MainCtrl", ["$scope", "$q", "$filter",
+    "StorageService", "subjectFilter", "hotNewsFilter",
+    "API_BASE_URL", "HOT_ITEM_PERIOD",
     function($scope, $q, $filter, StorageService, 
       subjectFilter, hotNewsFilter, API_BASE_URL, HOT_ITEM_PERIOD) {
       
       StorageService.initFB();
-      var storage = StorageService.getStorage('hackernews');
+      var storage = StorageService.getStorage("hackernews");
       $scope.news = [];
       $scope.filters = StorageService.filters;
       $scope.curFilter = $scope.filters[1].value;
       $scope.customeFilter = $scope.filters[0];
-		  $scope.onlyHotNews = storage.get('onlyHotNews');
+		  $scope.onlyHotNews = storage.get("onlyHotNews");
       $scope.fbShare = StorageService.fbShare;
       var concatUniq = StorageService.concatUniq;
 
@@ -21,8 +21,8 @@
       };
 
       $scope.filterNews = function(news, filter, hotNews) {
-        return $filter('subject')(
-					$filter('hotNews')(news, hotNews, HOT_ITEM_PERIOD), filter
+        return $filter("subject")(
+					$filter("hotNews")(news, hotNews, HOT_ITEM_PERIOD), filter
 				);
       };
 
@@ -37,18 +37,18 @@
         StorageService.cleanCache(storage);
       };
 
-      var prevFilter = storage.get('prevFilter');
+      var prevFilter = storage.get("prevFilter");
       $scope.curFilter = prevFilter;
 
-      $scope.$watch('curFilter', function(cur, prev) {
+      $scope.$watch("curFilter", function(cur, prev) {
         if (cur !== prev) {
-          storage.set('prevFilter', $scope.curFilter);
+          storage.set("prevFilter", $scope.curFilter);
         }
       });
 
-      $scope.$watch('onlyHotNews', function(cur, prev) {
+      $scope.$watch("onlyHotNews", function(cur, prev) {
         if (cur !== prev) {
-          storage.set('onlyHotNews', cur);
+          storage.set("onlyHotNews", cur);
         }
       });
 
@@ -57,18 +57,18 @@
         $scope.news = [];
         newsUrls = [];
 
-        $scope.curStep = 'Fetching the list...';
-        fetch(API_BASE_URL+'/topstories.json')
+        $scope.curStep = "Fetching the list...";
+        fetch(API_BASE_URL+"/topstories.json")
           .then(function(x) { return x.json(); })
           .then(function(x) {
             concatUniq(x, StorageService.getPrevNews(storage))
             .forEach(function(a, n) {
-              var prevItem = storage.get(''+a);
+              var prevItem = storage.get(""+a);
               if (prevItem === null || prevItem === undefined) {
                 newsUrls.push(
-                  fetch(API_BASE_URL+'/item/'+a+'.json')
+                  fetch(API_BASE_URL+"/item/"+a+".json")
                   .then(function(i) {
-                    $scope.curStep = 'Fetching items... ' + n;
+                    $scope.curStep = "Fetching items... " + n;
                     return i.json();
                   })
                   .catch(function(err) {
@@ -80,7 +80,7 @@
               }
             });
             $q.all(newsUrls).then(function(results){
-              $scope.curStep = 'Filtering items...';
+              $scope.curStep = "Filtering items...";
 
               results.forEach(function(i) {
 
@@ -93,14 +93,14 @@
                   time: i.time
                 };
 
-                storage.set(''+i.id, item);
+                storage.set(""+i.id, item);
                 if (i.url) {
                   $scope.news.push(item);
                 }
 
               });
               $scope.curStep = null;
-              storage.set('prevNews', $scope.news.map(function(i) {
+              storage.set("prevNews", $scope.news.map(function(i) {
                 return i.id;
               }));
             });
@@ -110,7 +110,7 @@
             $scope.$apply(function() {
               StorageService.getPrevNews(storage)
               .forEach(function(a, n) {
-                var prevItem = storage.get(''+a);
+                var prevItem = storage.get(""+a);
                 if (prevItem && prevItem.url) {
                     $scope.news.push(prevItem);
                 }
@@ -123,4 +123,4 @@
       $scope.refreshItems();
 
   }]);
-})();
+}());
