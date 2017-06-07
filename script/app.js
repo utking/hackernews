@@ -1,3 +1,3 @@
 (function() {
-  var app = angular.module('HackerNews', []);
-})();
+  var app = angular.module("HackerNews", []);
+}());

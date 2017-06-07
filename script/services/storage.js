@@ -1,22 +1,22 @@
 (function(module) {
-  angular.module('HackerNews')
-  .factory('StorageService', [function() {
+  angular.module("HackerNews")
+  .factory("StorageService", [function() {
 
     var _filters = [
-      { title: 'All' },
-      { title: 'General', value: '\\bjs\\b,(ecma|java).*script,\\bnode(\\.?js)?\\b,\\bcss\\b,\\bstyle\\b,\\blinux\\b,\\bnpm\\b,sql,graphql' },
-      { title: 'JavaScript', value: '\\bjs\\b,(ecma|java).*script,\\bnode(\\.?js)?\\b,\\bnpm\\b' },
-      { title: 'SQL', value: 'sql' },
-      { title: 'GraphQL', value: 'graphql' },
-      { title: 'API', value: '\\bapi\\b' },
-      { title: 'Css', value: '\\bcss\\b,\\bstyle\\b' },
-      { title: 'Linux', value: '\\linux\\b' },
-      { title: 'Angular', value: '\\bangular' }
+      { title: "All" },
+      { title: "General", value: "\\bjs\\b,(ecma|java).*script,\\bnode(\\.?js)?\\b,\\bcss\\b,\\bstyle\\b,\\blinux\\b,\\bnpm\\b,sql,graphql" },
+      { title: "JavaScript", value: "\\bjs\\b,(ecma|java).*script,\\bnode(\\.?js)?\\b,\\bnpm\\b" },
+      { title: "SQL", value: "sql" },
+      { title: "GraphQL", value: "graphql" },
+      { title: "API", value: "\\bapi\\b" },
+      { title: "Css", value: "\\bcss\\b,\\bstyle\\b" },
+      { title: "Linux", value: "\\linux\\b" },
+      { title: "Angular", value: "\\bangular" }
     ];
 
     /**
      * LocalStorage class allowing to store any types including
-     * arrays and objects. Uses localStorage when it's possible
+     * arrays and objects. Uses localStorage when it"s possible
      * or internal storage if not
      * @param value
      * @returns {LocalStorage}
@@ -29,7 +29,7 @@
         }
 
         if (!value || !value.charAt) {
-            throw new Error('You should specify the basket name');
+            throw new Error("You should specify the basket name");
         } else {
             this.basket = value;
         }
@@ -70,38 +70,38 @@
     };
 
     /**
-     * Save the 'val' into the storage as a variable
-     * with the 'prop' name
+     * Save the "val" into the storage as a variable
+     * with the "prop" name
      * @param prop
      * @param val
      */
     LocalStorage.prototype.set = function (prop, val) {
         if (!this.basket) {
-            throw new Error('You should specify the basket name first');
+            throw new Error("You should specify the basket name first");
         }
         if (!prop || !prop.charAt) {
-            throw new Error('You should specify the property name');
+            throw new Error("You should specify the property name");
         }
-        this.localStorage.setItem(this.basket+'.'+prop, JSON.stringify(val));
+        this.localStorage.setItem(this.basket+"."+prop, JSON.stringify(val));
         return this;
     };
 
     /**
-     * Get a value of the variable 'prop'. Return
-     * defVal if there is no such 'prop' in the storage
+     * Get a value of the variable "prop". Return
+     * defVal if there is no such "prop" in the storage
      * @param prop
      * @param defVal
      * @returns {*}
      */
     LocalStorage.prototype.get = function (prop, defVal) {
         if (!this.basket) {
-            throw new Error('You should specify the basket name first');
+            throw new Error("You should specify the basket name first");
         }
         if (!prop || !prop.charAt) {
-            throw new Error('You should specify the property name');
+            throw new Error("You should specify the property name");
         }
 
-        var val = this.localStorage.getItem(this.basket+'.'+prop);
+        var val = this.localStorage.getItem(this.basket+"."+prop);
         if (val === null) {
             return defVal;
         }
@@ -113,17 +113,17 @@
     };
 
     /**
-     * Remove the item with the 'prop' name
+     * Remove the item with the "prop" name
      * @param prop
      */
     LocalStorage.prototype.remove = function (prop) {
         if (!this.basket) {
-            throw new Error('You should specify the basket name first');
+            throw new Error("You should specify the basket name first");
         }
         if (!prop || !prop.charAt) {
-            throw new Error('You should specify the property name');
+            throw new Error("You should specify the property name");
         }
-        this.localStorage.removeItem(this.basket+'.'+prop);
+        this.localStorage.removeItem(this.basket+"."+prop);
         return this;
     };
 
@@ -131,7 +131,7 @@
      * Clean all the variables whose names start with the basket name
      */
     LocalStorage.prototype.clean = function () {
-        var r = new RegExp('^'+this.basket+'\\.');
+        var r = new RegExp("^"+this.basket+"\\.");
         try {
             // determine what storate to use
             for (var i in window.localStorage) {
@@ -149,7 +149,7 @@
       if (!storage || !storage.get) {
         return [];
       }
-      var prevNews = storage.get('prevNews');
+      var prevNews = storage.get("prevNews");
       if (!Array.isArray(prevNews)) {
         prevNews = [];
       }
@@ -159,7 +159,7 @@
     var removeCachedItems = function(storage, items) {
       if (Array.isArray(items)) {
         items.forEach(function(i) {
-          storate.remove(''+i);
+          storage.remove(i);
         });
       }
     };
@@ -171,9 +171,9 @@
     var initFB = function() {
       try {
         FB.init({
-          appId: '628486370676726',
+          appId: "628486370676726",
           xfbml: true,
-          version: 'v2.9'
+          version: "v2.9"
         });
         FB.AppEvents.logPageView();
       } catch(e) {}
@@ -182,7 +182,7 @@
     var fbShare = function(url) {
       try {
         FB.ui({
-          method: 'share',
+          method: "share",
           href: url,
         }, function(response) {});
       } catch(e) {}
@@ -214,5 +214,5 @@
       fbShare: fbShare
     };
   }]);
-})(this);
+}(this));
 

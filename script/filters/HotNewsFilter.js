@@ -11,6 +11,6 @@
       return array.filter(function(i) {
         return (new Date - i.created)/1000 < interval;
       });
-    }
+    };
   }]);
 }());

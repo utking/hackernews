@@ -12,7 +12,7 @@
       $scope.filters = StorageService.filters;
       $scope.curFilter = $scope.filters[1].value;
       $scope.customeFilter = $scope.filters[0];
-		  $scope.onlyHotNews = storage.get("onlyHotNews");
+      $scope.onlyHotNews = storage.get("onlyHotNews");
       $scope.fbShare = StorageService.fbShare;
       var concatUniq = StorageService.concatUniq;
 
@@ -22,8 +22,8 @@
 
       $scope.filterNews = function(news, filter, hotNews) {
         return $filter("subject")(
-					$filter("hotNews")(news, hotNews, HOT_ITEM_PERIOD), filter
-				);
+          $filter("hotNews")(news, hotNews, HOT_ITEM_PERIOD), filter
+        );
       };
 
       $scope.filterNewsLength = function(news, filter, hotNews) {
@@ -64,7 +64,7 @@
             concatUniq(x, StorageService.getPrevNews(storage))
             .forEach(function(a, n) {
               var prevItem = storage.get(""+a);
-              if (prevItem === null || prevItem === undefined) {
+              if (!prevItem) {
                 newsUrls.push(
                   fetch(API_BASE_URL+"/item/"+a+".json")
                   .then(function(i) {
