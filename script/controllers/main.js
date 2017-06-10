@@ -118,6 +118,7 @@
               $scope.curStep = null;
             });
           });
+        $scope.lastUpdateTime = new Date();
       };
 
       $scope.refreshItems();
