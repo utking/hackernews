@@ -103,7 +103,9 @@
               storage.set("prevNews", $scope.news.map(function(i) {
                 return i.id;
               }));
-              $scope.lastUpdateTime = new Date();
+              if (newsUrls.length) {
+                $scope.lastUpdateTime = new Date();
+              }
             });
           })
           .catch(function(err) {
