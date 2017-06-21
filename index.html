@@ -36,7 +36,7 @@
 			</div>
     </header>
     <div id="news-list" class="container">
-      <h3>Top Hacker News <span>({{filterNewsLength(news, curFilter, onlyHotNews)}} / {{news.length}})</span> <span id="last-update-time"> [Last update was {{lastUpdateTime | date:'medium'}}]</span></h3>
+      <h3>Top Hacker News <span>({{filterNewsLength(news, curFilter, onlyHotNews)}} / {{news.length}})</span> <span ng-if="lastUpdateTime" id="last-update-time"> [Last update was {{lastUpdateTime | date:'medium'}}]</span></h3>{{lastUpdateTime}}
       <hr>
       <div class="row">
       </div>

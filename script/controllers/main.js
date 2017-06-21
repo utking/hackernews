@@ -7,7 +7,6 @@
       subjectFilter, hotNewsFilter, API_BASE_URL, HOT_ITEM_PERIOD) {
       
       StorageService.initFB();
-      $scope.lastUpdateTime = '-';
       var storage = StorageService.getStorage("hackernews");
       $scope.news = [];
       $scope.filters = StorageService.filters;
