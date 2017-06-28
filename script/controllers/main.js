@@ -9,6 +9,7 @@
       StorageService.initFB();
       var storage = StorageService.getStorage("hackernews");
       $scope.news = [];
+      $scope.lastUpdateTime = new Date(storage.get("lastUpdateTime"));
       $scope.filters = StorageService.filters;
       $scope.curFilter = $scope.filters[1].value;
       $scope.customeFilter = $scope.filters[0];
@@ -105,6 +106,7 @@
               }));
               if (newsUrls.length) {
                 $scope.lastUpdateTime = new Date();
+                storage.set("lastUpdateTime", $scope.lastUpdateTime);
               }
             });
           })
