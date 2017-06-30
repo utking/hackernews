@@ -4,7 +4,7 @@
 
     var _filters = [
       { title: "All" },
-      { title: "General", value: "\\bjs\\b,(ecma|java).*script,\\bnode(\\.?js)?\\b,\\bcss\\b,\\bstyle\\b,\\blinux\\b,\\bnpm\\b,sql,graphql" },
+      { title: "General", value: "\\bjs\\b,(ecma|java).*script,\\bnode(\\.?js)?\\b,\\bcss\\b,\\bstyle\\b,\\blinux\\b,\\bnpm\\b,sql,graphql,\\bangular" },
       { title: "JavaScript", value: "\\bjs\\b,(ecma|java).*script,\\bnode(\\.?js)?\\b,\\bnpm\\b" },
       { title: "SQL", value: "sql" },
       { title: "GraphQL", value: "graphql" },
