@@ -1,6 +1,7 @@
 (function(module) {
+  "use strict";
   angular.module("HackerNews")
-  .factory("StorageService", [function() {
+  .factory("StorageService", ["$http", "API_BASE_URL", function($http, API_BASE_URL) {
 
     var _filters = [
       { title: "All" },
@@ -30,9 +31,8 @@
 
         if (!value || !value.charAt) {
             throw new Error("You should specify the basket name");
-        } else {
-            this.basket = value;
         }
+        this.basket = value;
         try {
             // try to use the built-in localStorage
             this.localStorage = window.localStorage;
@@ -133,8 +133,8 @@
     LocalStorage.prototype.clean = function () {
         var r = new RegExp("^"+this.basket+"\\.");
         try {
-            // determine what storate to use
-            for (var i in window.localStorage) {
+            // determine what storage to use
+            for (i in window.localStorage) {
                 if (r.test(i)) {
                     this.localStorage.removeItem(i);
                 }
@@ -176,7 +176,9 @@
           version: "v2.9"
         });
         FB.AppEvents.logPageView();
-      } catch(e) {}
+      } catch(e) {
+        console.log(e);
+      }
     };
 
     var fbShare = function(url) {
@@ -198,6 +200,14 @@
         }, []);
     };
 
+    var getList = function () {
+      return $http.get(API_BASE_URL+"/topstories.json");
+    };
+
+    var getItem = function(id) {
+      return $http.get(API_BASE_URL+"/item/"+id+".json");
+    }
+
     /**
      * Public interface
      */
@@ -211,7 +221,9 @@
       removeCachedItems: removeCachedItems,
       cleanCache: cleanCache,
       initFB: initFB,
-      fbShare: fbShare
+      fbShare: fbShare,
+      getList: getList,
+      getItem: getItem
     };
   }]);
 }(this));

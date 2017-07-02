@@ -1,11 +1,10 @@
 (function() {
+  "use strict";
   angular.module("HackerNews")
   .controller("MainCtrl", ["$scope", "$q", "$filter",
-    "StorageService", "subjectFilter", "hotNewsFilter",
-    "API_BASE_URL", "HOT_ITEM_PERIOD",
-    function($scope, $q, $filter, StorageService, 
-      subjectFilter, hotNewsFilter, API_BASE_URL, HOT_ITEM_PERIOD) {
-      
+    "StorageService", "subjectFilter", "hotNewsFilter", "HOT_ITEM_PERIOD",
+    function($scope, $q, $filter, StorageService,
+      subjectFilter, hotNewsFilter, HOT_ITEM_PERIOD) {
       StorageService.initFB();
       var storage = StorageService.getStorage("hackernews");
       $scope.news = [];
@@ -18,7 +17,7 @@
       var concatUniq = StorageService.concatUniq;
 
       $scope.isHotItem = function(item) {
-        return (new Date - item.created)/1000 < HOT_ITEM_PERIOD;
+        return (new Date() - item.created)/1000 < HOT_ITEM_PERIOD;
       };
 
       $scope.filterNews = function(news, filter, hotNews) {
@@ -54,33 +53,35 @@
       });
 
       $scope.refreshItems = function(filter) {
-        if (filter) $scope.curFilter = filter;
+        if (filter) {
+          $scope.curFilter = filter;
+        }
         $scope.news = [];
         newsUrls = [];
 
         $scope.curStep = "Fetching the list...";
-        fetch(API_BASE_URL+"/topstories.json")
-          .then(function(x) { return x.json(); })
+        StorageService.getList()
+          .then(function(x) { return x.data; })
           .then(function(x) {
             concatUniq(x, StorageService.getPrevNews(storage))
             .forEach(function(a, n) {
               var prevItem = storage.get(""+a);
               if (!prevItem) {
                 newsUrls.push(
-                  fetch(API_BASE_URL+"/item/"+a+".json")
+                  StorageService.getItem(a)
                   .then(function(i) {
                     $scope.curStep = "Fetching items... " + n;
-                    return i.json();
+                    return i.data;
                   })
                   .catch(function(err) {
                     $scope.error = err;
                   }));
               } else {
-                if (prevItem.url)
-                  $scope.news.push(prevItem);
+                if (prevItem.url) $scope.news.push(prevItem);
               }
             });
-            $q.all(newsUrls).then(function(results){
+            $q.all(newsUrls)
+            .then(function(results) {
               $scope.curStep = "Filtering items...";
 
               results.forEach(function(i) {
