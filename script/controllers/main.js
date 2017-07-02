@@ -77,7 +77,9 @@
                     $scope.error = err;
                   }));
               } else {
-                if (prevItem.url) $scope.news.push(prevItem);
+                if (prevItem.url) {
+                  $scope.news.push(prevItem);
+                }
               }
             });
             $q.all(newsUrls)

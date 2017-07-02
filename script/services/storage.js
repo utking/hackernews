@@ -1,7 +1,7 @@
 (function(module) {
   "use strict";
   angular.module("HackerNews")
-  .factory("StorageService", ["$http", "API_BASE_URL", function($http, API_BASE_URL) {
+  .factory("StorageService", ["$http", "API_BASE_URL", "$log", function($http, API_BASE_URL, $log) {
 
     var _filters = [
       { title: "All" },
@@ -134,7 +134,7 @@
         var r = new RegExp("^"+this.basket+"\\.");
         try {
             // determine what storage to use
-            for (i in window.localStorage) {
+            for (var i in window.localStorage) {
                 if (r.test(i)) {
                     this.localStorage.removeItem(i);
                 }
@@ -177,7 +177,7 @@
         });
         FB.AppEvents.logPageView();
       } catch(e) {
-        console.log(e);
+        $log(e);
       }
     };
 
@@ -206,7 +206,11 @@
 
     var getItem = function(id) {
       return $http.get(API_BASE_URL+"/item/"+id+".json");
-    }
+    };
+
+    var getStorage = function (basketName) {
+      return new LocalStorage(basketName);
+    };
 
     /**
      * Public interface
@@ -214,11 +218,9 @@
     return {
       filters: _filters,
       concatUniq: _concatUniq,
-      getStorage: function (basketName) {
-        return new LocalStorage(basketName);
-      },
       getPrevNews: getPrevNews,
       removeCachedItems: removeCachedItems,
+      getStorage: getStorage,
       cleanCache: cleanCache,
       initFB: initFB,
       fbShare: fbShare,
