@@ -33,9 +33,6 @@
 
       var newsUrls = [];
       var deferred = $q.defer();
-      $scope.cleanCache = function() {
-        StorageService.cleanCache(storage);
-      };
 
       var prevFilter = storage.get("prevFilter");
       $scope.curFilter = prevFilter;
@@ -126,6 +123,11 @@
               $scope.curStep = null;
             });
           });
+      };
+
+      $scope.cleanCache = function() {
+        StorageService.cleanCache(storage);
+        $scope.refreshItems();
       };
 
       $scope.refreshItems();
