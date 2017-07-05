@@ -187,7 +187,9 @@
           method: "share",
           href: url,
         }, function(response) {});
-      } catch(e) {}
+      } catch(e) {
+        $log(e);
+      }
     };
 
     var _concatUniq = function (ar1, ar2) {
