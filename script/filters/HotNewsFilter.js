@@ -1,4 +1,5 @@
 (function () {
+  "use strict";
   angular.module("HackerNews")
   .filter("hotNews",[function () {
     return function(array, onlyHot, interval) {

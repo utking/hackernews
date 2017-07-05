@@ -1,4 +1,5 @@
 (function () {
+  "use strict";
   angular.module("HackerNews")
   .filter("subject",[function () {
     return function(array, subjArrayStr) {
