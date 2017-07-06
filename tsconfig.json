@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": false,
+    "inlineSourceMap": false,
+    "checkJs": true,
+    "sourceRoot": "./src/ts",
+    "outFile": "./dist/js/bundle.js",
+    "alwaysStrict": true,
+    "removeComments": true,
+    "noUnusedParameters": true
+  },
+  "exclude": [
+    "node_modules",
+    "bower_components",
+    "docs",
+    "style"
+  ]
+}

@@ -1,18 +1,17 @@
 /*eslint-env node */
 var gulp = require("gulp");
 var usemin = require("gulp-usemin");
-var sourcemap = require("gulp-sourcemaps");
 var uglify = require("gulp-uglify");
 var minifyHtml = require("gulp-minify-html");
 var minifyCss = require("gulp-minify-css");
 var rev = require("gulp-rev");
 
 gulp.task("usemin", function() {
-	return gulp.src("./index.html")
+	return gulp.src("./src/index.html")
 	.pipe(usemin({
-		css: [ sourcemap.init(), rev(), sourcemap.write() ],
+		css: [ rev() ],
 		html: [ minifyHtml({ empty: true }) ],
-		js: [ sourcemap.init(), uglify(), rev(), sourcemap.write() ],
+		js: [ uglify(), rev() ],
 		inlinejs: [ uglify() ],
 		inlinecss: [ minifyCss(), "concat" ]
 	}))

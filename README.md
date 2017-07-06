@@ -12,7 +12,6 @@ Uses Gulp to compile the project and put it to the `docs` (public) folder.
 ### Install
 
 ```
-$ bower install
 $ npm install
 $ gulp
 ```
