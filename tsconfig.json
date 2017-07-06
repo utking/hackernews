@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "amd",
     "target": "es5",
-    "sourceMap": false,
+    "sourceMap": true,
     "inlineSourceMap": false,
-    "checkJs": true,
     "sourceRoot": "./src/ts",
     "outFile": "./dist/js/bundle.js",
     "alwaysStrict": true,
