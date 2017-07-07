@@ -5,10 +5,6 @@
 
                 let _filters: Array<IFilter> = [
                     {title: "All", value: undefined},
-                    {
-                        title: "General",
-                        value: "\\bjs\\b,(ecma|java).*script,\\bnode(\\.?js)?\\b,\\bcss\\b,\\bstyle\\b,\\blinux\\b,\\bnpm\\b,sql,graphql,\\bangular"
-                    },
                     {title: "JavaScript", value: "\\bjs\\b,(ecma|java).*script,\\bnode(\\.?js)?\\b,\\bnpm\\b"},
                     {title: "SQL", value: "sql"},
                     {title: "GraphQL", value: "graphql"},
@@ -18,23 +14,20 @@
                     {title: "Angular", value: "\\bangular"}
                 ];
 
+                _filters.unshift({
+                    title: "General",
+                    value: _filters.map((f) => f.value).join(",")
+                });
+
                 let getPrevNews = (storage: ILocalStorage): Array<number> => {
-                    if (!storage || !storage.get) {
-                        return [];
-                    }
                     let prevNews = storage.get("prevNews");
-                    if (!Array.isArray(prevNews)) {
-                        prevNews = [];
-                    }
-                    return prevNews;
+                    return (!Array.isArray(prevNews) ? [] : prevNews);
                 };
 
                 let removeCachedItems = (storage: ILocalStorage, items: Array<string>) => {
-                    if (Array.isArray(items)) {
-                        items.forEach((i: string) => {
-                            storage.remove(i);
-                        });
-                    }
+                    items.forEach((i: string) => {
+                        storage.remove(i);
+                    });
                 };
 
                 let cleanCache = (storage: ILocalStorage): void => {
@@ -59,7 +52,8 @@
                         FB.ui({
                             method: "share",
                             href: url
-                        }, (/*resp*/) => {
+                        }, () => {
+                            $log('Facebook share UI initialized');
                         });
                     } catch (e) {
                         $log(e);
