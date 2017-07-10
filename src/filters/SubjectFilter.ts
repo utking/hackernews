@@ -2,7 +2,7 @@
     angular.module("HackerNews")
         .filter("subject", [(): (array: Array<INewsItem>, subjArrayStr: string) => Array<INewsItem> => {
             return (array: Array<INewsItem>, subjArrayStr: string): Array<INewsItem> => {
-                let reArr = [];
+                let reArr: RegExp[] = [];
                 if (!subjArrayStr) {
                     return array;
                 }

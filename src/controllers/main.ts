@@ -3,8 +3,8 @@
         news: Array<INewsItem>;
         lastUpdateTime: Date;
         filters: Array<IFilter>;
-        curFilter: string;
-        curStep: string;
+        curFilter: string | undefined;
+        curStep: string | null;
         error: string;
         onlyHotNews: boolean;
         fbShare: (url: string) => void;
