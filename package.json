@@ -15,8 +15,11 @@
     "gulp-rev": "^7.1.2",
     "gulp-sourcemap": "^1.0.1",
     "gulp-sourcemaps": "^2.6.0",
+    "gulp-typescript": "^3.2.0",
     "gulp-uglify": "^2.1.2",
-    "gulp-usemin": "^0.3.28"
+    "gulp-usemin": "^0.3.28",
+    "run-sequence": "^2.0.0",
+    "typescript": "^2.4.1"
   },
   "dependencies": {
     "angular": "^1.6.5",

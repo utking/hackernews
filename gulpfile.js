@@ -5,6 +5,15 @@ var uglify = require("gulp-uglify");
 var minifyHtml = require("gulp-minify-html");
 var minifyCss = require("gulp-minify-css");
 var rev = require("gulp-rev");
+var ts = require("gulp-typescript");
+var tsProject = ts.createProject("./tsconfig.json");
+var runSequence = require('run-sequence');
+
+gulp.task("ts-compile", function () {
+  return tsProject.src()
+    .pipe(tsProject())
+    .js.pipe(gulp.dest("./"));
+});
 
 gulp.task("usemin", function() {
 	return gulp.src("./src/index.html")
@@ -18,5 +27,7 @@ gulp.task("usemin", function() {
 	.pipe(gulp.dest("docs"));
 });
 
-gulp.task("default", ["usemin"]);
+gulp.task("default", function() {
+  runSequence("ts-compile", ["usemin"]);
+});
 
