@@ -7,7 +7,7 @@ var minifyCss = require("gulp-minify-css");
 var rev = require("gulp-rev");
 var ts = require("gulp-typescript");
 var tsProject = ts.createProject("./tsconfig.json");
-var runSequence = require('run-sequence');
+var runSequence = require("run-sequence");
 
 gulp.task("ts-compile", function () {
   return tsProject.src()
