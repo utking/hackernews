@@ -16,7 +16,7 @@
 
                 _filters.unshift({
                     title: "General",
-                    value: _filters.map((f) => f.value).join(",")
+                    value: _filters.filter((f) => f.value).map((f) => f.value).join(",")
                 });
 
                 let getPrevNews = (storage: ILocalStorage): Array<number> => {
