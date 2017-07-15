@@ -11,6 +11,7 @@
                     {title: "API", value: "\\bapi\\b"},
                     {title: "Css", value: "\\bcss\\b,\\bstyle\\b"},
                     {title: "Linux", value: "\\linux\\b"},
+                    {title: "Vue", value: "\\vue(\\.?js)?\\b"},
                     {title: "Angular", value: "\\bangular"}
                 ];
 
