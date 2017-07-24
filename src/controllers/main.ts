@@ -43,8 +43,6 @@
                     return (items ? items.length : 0);
                 };
 
-                let newsUrls = [];
-
                 $scope.curFilter = storage.get("prevFilter");
 
                 $scope.$watch("curFilter", (cur, prev) => {
@@ -60,11 +58,11 @@
                 });
 
                 $scope.refreshItems = (filter: string): void => {
+                    let newsUrls = [];
                     if (filter) {
                         $scope.curFilter = filter;
                     }
                     $scope.news = [];
-                    newsUrls = [];
 
                     $scope.curStep = "Fetching the list...";
                     StorageService.getList()
@@ -73,12 +71,12 @@
                         })
                         .then((x: Array<number>) => {
                             StorageService.concatUniq(x, StorageService.getPrevNews(storage))
-                                .forEach((a, n) => {
+                                .forEach((a: number, n: number) => {
                                     let prevItem = storage.get(`${a}`);
                                     if (!prevItem) {
                                         newsUrls.push(
                                             StorageService.getItem(a)
-                                                .then((i) => {
+                                                .then((i: ng.IHttpPromiseCallbackArg<INewsItem>) => {
                                                     $scope.curStep = `Fetching items... ${n}`;
                                                     return i.data;
                                                 })
