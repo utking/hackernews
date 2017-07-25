@@ -1,7 +1,8 @@
 (function () {
+    const API_BASE_URL = "https://hacker-news.firebaseio.com/v0";
     angular.module("HackerNews")
-        .factory("StorageService", ["$http", "API_BASE_URL", "$log",
-            ($http: ng.IHttpService, API_BASE_URL: string, $log: ng.ILogCall): IStorageService => {
+        .factory("StorageService", ["$http", "$log",
+            ($http: ng.IHttpService, $log: ng.ILogCall): IStorageService => {
 
                 let _filters: Array<IFilter> = [
                     {title: "All", value: undefined},
