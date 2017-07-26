@@ -66,7 +66,7 @@
 
                     $scope.curStep = "Fetching the list...";
                     StorageService.getList()
-                        .then((x) => {
+                      .then((x: ng.IHttpPromiseCallbackArg<Array<number>>) => {
                             return x.data;
                         })
                         .then((x: Array<number>) => {
@@ -80,7 +80,7 @@
                                                     $scope.curStep = `Fetching items... ${n}`;
                                                     return i.data;
                                                 })
-                                                .catch((err) => {
+                                                .catch((err: any) => {
                                                     $scope.error = err.statusText;
                                                 }));
                                     } else {
@@ -95,7 +95,7 @@
 
                                     results.forEach((i: INewsItem) => {
 
-                                        let item = {
+                                    let item = <INewsItem>{
                                             id: i.id,
                                             created: (new Date).valueOf(),
                                             type: i.type,
@@ -111,7 +111,7 @@
 
                                     });
                                     $scope.curStep = null;
-                                    storage.set("prevNews", $scope.news.map((i: INewsItem) => {
+                                    storage.set("prevNews", $scope.news.map((i: INewsItem): number => {
                                         return i.id;
                                     }));
                                     if (newsUrls.length) {
