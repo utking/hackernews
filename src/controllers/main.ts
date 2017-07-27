@@ -28,6 +28,39 @@
                 $scope.onlyHotNews = storage.get("onlyHotNews");
                 $scope.fbShare = StorageService.fbShare;
 
+                let _processDownloaded = (_urls: Array<INewsItem>, s: scopeType, _storage: ILocalStorage) => {
+                    $q.all(_urls)
+                        .then((results: Array<INewsItem>): void => {
+                            s.curStep = "Filtering items...";
+
+                            results.forEach((i: INewsItem) => {
+
+                                let item = <INewsItem>{
+                                    id: i.id,
+                                    created: (new Date).valueOf(),
+                                    type: i.type,
+                                    title: i.title,
+                                    url: i.url,
+                                    time: i.time
+                                };
+
+                                _storage.set(`${i.id}`, item);
+                                if (i.url) {
+                                    s.news.push(item);
+                                }
+
+                            });
+                            $scope.curStep = null;
+                            _storage.set("prevNews", s.news.map((i: INewsItem): number => {
+                                return i.id;
+                            }));
+                            if (_urls.length) {
+                                s.lastUpdateTime = new Date();
+                                _storage.set("lastUpdateTime", s.lastUpdateTime);
+                            }
+                        });
+                };
+
                 $scope.isHotItem = (item: INewsItem): boolean => {
                     return (new Date().valueOf() - item.created) / 1000 < HOT_ITEM_PERIOD;
                 };
@@ -66,7 +99,7 @@
 
                     $scope.curStep = "Fetching the list...";
                     StorageService.getList()
-                      .then((x: ng.IHttpPromiseCallbackArg<Array<number>>) => {
+                        .then((x: ng.IHttpPromiseCallbackArg<Array<number>>) => {
                             return x.data;
                         })
                         .then((x: Array<number>) => {
@@ -89,36 +122,7 @@
                                         }
                                     }
                                 });
-                            $q.all(newsUrls)
-                                .then((results: Array<INewsItem>): void => {
-                                    $scope.curStep = "Filtering items...";
-
-                                    results.forEach((i: INewsItem) => {
-
-                                    let item = <INewsItem>{
-                                            id: i.id,
-                                            created: (new Date).valueOf(),
-                                            type: i.type,
-                                            title: i.title,
-                                            url: i.url,
-                                            time: i.time
-                                        };
-
-                                        storage.set(`${i.id}`, item);
-                                        if (i.url) {
-                                            $scope.news.push(item);
-                                        }
-
-                                    });
-                                    $scope.curStep = null;
-                                    storage.set("prevNews", $scope.news.map((i: INewsItem): number => {
-                                        return i.id;
-                                    }));
-                                    if (newsUrls.length) {
-                                        $scope.lastUpdateTime = new Date();
-                                        storage.set("lastUpdateTime", $scope.lastUpdateTime);
-                                    }
-                                });
+                            _processDownloaded(newsUrls, $scope, storage);
                         })
                         .catch((/*err*/) => {
                             // Fail-safe: read from cache
