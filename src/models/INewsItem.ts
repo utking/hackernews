@@ -8,4 +8,5 @@ interface INewsItem {
     url: string;
     type: string;
     time: number;
+    check?: number;
 }

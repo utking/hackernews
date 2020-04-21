@@ -4,7 +4,7 @@
         .factory("StorageService", ["$http", "$log",
             ($http: ng.IHttpService, $log: ng.ILogCall): IStorageService => {
 
-                let _filters: Array<IFilter> = [
+                const _filters: Array<IFilter> = [
                     {title: "All", value: undefined},
                     {title: "JavaScript", value: "\\bjs\\b,(ecma|java).*script,\\bnode(\\.?js)?\\b,\\bnpm\\b"},
                     {title: "SQL", value: "sql"},
@@ -21,22 +21,22 @@
                     value: _filters.filter((f: IFilter) => f.value).map((f: IFilter) => f.value).join(",")
                 });
 
-                let getPrevNews = (storage: ILocalStorage): Array<number> => {
-                    let prevNews = storage.get("prevNews");
+                const getPrevNews = (storage: ILocalStorage): Array<number> => {
+                    const prevNews = storage.get("prevNews");
                     return (!Array.isArray(prevNews) ? [] : prevNews);
                 };
 
-                let removeCachedItems = (storage: ILocalStorage, items: Array<string>) => {
+                const removeCachedItems = (storage: ILocalStorage, items: Array<string>) => {
                     items.forEach((i: string) => {
                         storage.remove(i);
                     });
                 };
 
-                let cleanCache = (storage: ILocalStorage): void => {
+                const cleanCache = (storage: ILocalStorage): void => {
                     storage.clean();
                 };
 
-                let initFB = (): void => {
+                const initFB = (): void => {
                     try {
                         FB.init({
                             appId: "628486370676726",
@@ -49,7 +49,7 @@
                     }
                 };
 
-                let fbShare = (url: string): void => {
+                const fbShare = (url: string): void => {
                     try {
                         FB.ui({
                             method: "share",
@@ -62,7 +62,7 @@
                     }
                 };
 
-                let _concatUniq = (ar1: Array<number>, ar2: Array<number>): Array<number> => {
+                const _concatUniq = (ar1: Array<number>, ar2: Array<number>): Array<number> => {
                     return ar1.concat(ar2)
                         .reduce((prev: Array<number>, i: number): Array<number> => {
                             if (i && prev.indexOf(i) === -1) {
@@ -72,15 +72,15 @@
                         }, []);
                 };
 
-                let getList = (): ng.IHttpPromise<Array<number>> => {
+                const getList = (): ng.IHttpPromise<Array<number>> => {
                     return $http.get(`${API_BASE_URL}/topstories.json`);
                 };
 
-                let getItem = (id: number): ng.IHttpPromise<INewsItem> => {
+                const getItem = (id: number): ng.IHttpPromise<INewsItem> => {
                     return $http.get(`${API_BASE_URL}/item/${id}.json`);
                 };
 
-                let getStorage = (basketName: string): ILocalStorage => {
+                const getStorage = (basketName: string): ILocalStorage => {
                     return new LocalStorage(basketName.trim());
                 };
 

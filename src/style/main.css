@@ -17,7 +17,7 @@ html, body {
 }
 
 .hot-item {
-  background: #cceeaf;
+  background: #53d656;
 }
 
 .card p {
@@ -25,6 +25,14 @@ html, body {
 }
 .card a {
   text-decoration: none;
+}
+
+.card.fluid {
+  border-radius: 4px;
+}
+
+#type-select {
+  margin: .05rem .5rem .05rem .05rem;
 }
 
 a.vk-share-btn {

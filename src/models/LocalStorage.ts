@@ -16,22 +16,22 @@ class LocalStorage implements ILocalStorage {
             this.localStorage = window.localStorage;
         } catch (e) {
 
-            let _getItem = (prop: string, defVal: any): any => {
+            const _getItem = (prop: string, defVal: any): any => {
                 if (this._store[prop]) {
                     return this._store[prop];
                 }
                 return defVal !== undefined ? defVal : null;
             };
 
-            let _setItem = (prop: string, val: any): void => {
+            const _setItem = (prop: string, val: any): void => {
                 this._store[prop] = val;
             };
 
-            let _removeItem = (prop: string): void => {
+            const _removeItem = (prop: string): void => {
                 this._store[prop] = undefined;
             };
 
-            let _clean = (): void => {
+            const _clean = (): void => {
                 this._store = {};
             };
 
@@ -62,7 +62,7 @@ class LocalStorage implements ILocalStorage {
             throw new Error("You should specify the property name");
         }
 
-        let val = this.localStorage.getItem(`${this._basket}.${prop}`);
+        const val = this.localStorage.getItem(`${this._basket}.${prop}`, null);
         if (val === null) {
             return defVal;
         }
@@ -84,10 +84,10 @@ class LocalStorage implements ILocalStorage {
     }
 
     clean(): void {
-        let r = new RegExp("^" + this._basket + "\\.");
+        const r = new RegExp("^" + this._basket + "\\.");
         try {
             // determine what storage to use
-            for (let i in window.localStorage) {
+            for (const i in window.localStorage) {
                 if (r.test(i)) {
                     this.localStorage.removeItem(i);
                 }

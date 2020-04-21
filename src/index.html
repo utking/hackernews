@@ -22,7 +22,7 @@
     <header class="sticky">
 			<div class="input-group">
         <a href="#" class="logo"></a>
-			  <select class="form-control" ng-model="curFilter"
+			  <select class="form-control" ng-model="curFilter" id="type-select"
 					ng-options="f.value as f.title for f in filters"></select>
 			  <button class="btn btn-default button secondary" 
 				  ng-disabled="curStep" role="button" 

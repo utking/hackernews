@@ -7,7 +7,7 @@ var minifyCss = require("gulp-minify-css");
 var rev = require("gulp-rev");
 var ts = require("gulp-typescript");
 var tsProject = ts.createProject("./tsconfig.json");
-var runSequence = require("run-sequence");
+var runSequence = require("gulp4-run-sequence");
 
 gulp.task("ts-compile", function () {
   return tsProject.src()
@@ -15,7 +15,7 @@ gulp.task("ts-compile", function () {
     .js.pipe(gulp.dest("./"));
 });
 
-gulp.task("usemin", function() {
+gulp.task("usemin", async function() {
 	return gulp.src("./src/index.html")
 	.pipe(usemin({
 		css: [ rev() ],
@@ -24,10 +24,9 @@ gulp.task("usemin", function() {
 		inlinejs: [ uglify() ],
 		inlinecss: [ minifyCss(), "concat" ]
 	}))
-	.pipe(gulp.dest("docs"));
+	.pipe(gulp.dest("dist"));
 });
 
-gulp.task("default", function() {
+gulp.task("default", async function() {
   runSequence("ts-compile", ["usemin"]);
 });
-

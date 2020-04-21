@@ -7,22 +7,23 @@
     "test": "gulp"
   },
   "devDependencies": {
-    "@types/angular": "^1.6.25",
     "@types/facebook-js-sdk": "^2.8.2",
-    "gulp": "^3.9.1",
-    "gulp-minify-css": "^1.2.4",
-    "gulp-minify-html": "^1.0.6",
-    "gulp-rev": "^7.1.2",
-    "gulp-sourcemap": "^1.0.1",
-    "gulp-sourcemaps": "^2.6.0",
-    "gulp-typescript": "^3.2.0",
-    "gulp-uglify": "^2.1.2",
-    "gulp-usemin": "^0.3.28",
-    "run-sequence": "^2.0.0",
-    "typescript": "^2.4.1"
+    "gulp4-run-sequence": "^1.0.1",
+    "typescript": "^2.4.1",
+    "@types/angular": "1.7.0",
+    "@types/angular-mocks": "^1.7.0"
   },
   "dependencies": {
-    "angular": "^1.6.5",
-    "mini.css": "^2.3.2"
+    "angular": "^1.7.9",
+    "gulp": "^4.0.2",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-rev": "^9.0.0",
+    "gulp-sourcemap": "^1.0.1",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "gulp-uglify": "^3.0.2",
+    "gulp-usemin": "^0.3.30",
+    "mini.css": "^3.0.1"
   }
 }
