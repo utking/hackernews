@@ -24,7 +24,7 @@ gulp.task("usemin", async function() {
 		inlinejs: [ uglify() ],
 		inlinecss: [ minifyCss(), "concat" ]
 	}))
-	.pipe(gulp.dest("dist"));
+	.pipe(gulp.dest("docs"));
 });
 
 gulp.task("default", async function() {
