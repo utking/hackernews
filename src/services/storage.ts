@@ -7,6 +7,7 @@
                 const _filters: Array<IFilter> = [
                     {title: "All", value: undefined},
                     {title: "JavaScript", value: "\\bjs\\b,(ecma|java).*script,\\bnode(\\.?js)?\\b,\\bnpm\\b"},
+                    {title: "Covid", value: "covid,delta,vaccin"},
                     {title: "SQL", value: "sql"},
                     {title: "GraphQL", value: "graphql"},
                     {title: "API", value: "\\bapi\\b"},
