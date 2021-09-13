@@ -11,9 +11,11 @@
                     {title: "SQL", value: "sql"},
                     {title: "GraphQL", value: "graphql"},
                     {title: "API", value: "\\bapi\\b"},
+                    {title: "Hackers", value: "\\hack,\\bpassw,securi,vulner,\\bbot\\b,botnet,owasp"},
                     {title: "Css", value: "\\bcss\\b,\\bstyle\\b"},
-                    {title: "Linux", value: "\\linux\\b"},
-                    {title: "FAANG", value: "google,apple,facebook,\\bfb\\b,microsoft,\\bms\\b,netflix"},
+                    {title: "Linux", value: "\\linux\\b,ubuntu,debian,\\bgnu\\b"},
+                    {title: "Services", value: "docker,haproxy"},
+                    {title: "FAANG", value: "google,apple,facebook,\\bfb\\b,microsoft,\\bms\\b,netflix,whatsapp,amazon,\\baws\\b"},
                     {title: "Vue", value: "\\vue(\\.?js)?\\b"},
                     {title: "Angular", value: "\\bangular"}
                 ];
