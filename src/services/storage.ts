@@ -14,7 +14,7 @@
                     {title: "Hackers", value: "\\hack,\\bpassw,securi,vulner,\\bbot\\b,botnet,owasp"},
                     {title: "Css", value: "\\bcss\\b,\\bstyle\\b"},
                     {title: "Linux", value: "\\linux\\b,ubuntu,debian,\\bgnu\\b"},
-                    {title: "Services", value: "docker,haproxy"},
+                    {title: "Services", value: "docker,haproxy,cassandra,elasticsearch,rabbitmq,nginx,k8s,kubernetes,postfix"},
                     {title: "FAANG", value: "google,apple,facebook,\\bfb\\b,microsoft,\\bms\\b,netflix,whatsapp,amazon,\\baws\\b"},
                     {title: "Vue", value: "\\vue(\\.?js)?\\b"},
                     {title: "Angular", value: "\\bangular"}
