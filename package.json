@@ -24,6 +24,11 @@
     "gulp-typescript": "^6.0.0-alpha.1",
     "gulp-uglify": "^3.0.2",
     "gulp-usemin": "^0.3.30",
+    "color-string": ">=1.5.5",
+    "glob-parent": ">=5.1.2",
+    "ini": ">=1.3.6",
+    "lodash.template": ">=4.5.0",
+    "clean-css": ">=4.1.11",
     "mini.css": "^3.0.1"
   }
 }
